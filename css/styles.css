@@ -1,0 +1,69 @@
+/* Bas-tokens */
+:root {
+  --bg: #0b1020;
+  --surface: #11162a;
+  --border: #1e2640;
+  --text: #e6e9f2;
+  --text-muted: #a6b0cf;
+
+  --accent: #7c4dff;     
+  --accent-2: #22d3ee;    
+  --warning: #f59e0b;
+
+  --radius: 14px;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gap: 1rem;
+  --speed: 160ms;
+  --font: ui-sans-serif, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
+}
+
+/* Valfri ljus variant */
+:root[data-theme="light"]{
+  --bg: #f6f8ff;
+  --surface: #ffffff;
+  --border: #dfe3f6;
+  --text: #101224;
+  --text-muted: #414b6e;
+}
+
+/* Grundlayout */
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  color:var(--text);
+  background: var(--bg);
+}
+header,nav,footer{background:var(--surface); border-bottom:1px solid var(--border)}
+a{color:var(--accent)}
+.button{
+  display:inline-block; padding:.7rem 1rem; border-radius:var(--radius);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color:#fff; border:none; transition:transform var(--speed);
+}
+.button:hover{ transform: translateY(-1px) }
+
+/* Kort/galleri */
+.grid{
+  display:grid; gap:var(--gap);
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+}
+.card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
+}
+.card img{ width:100%; height:180px; object-fit:cover }
+
+/* Responsiva brytpunkter */
+@media (max-width:600px){ .grid{ grid-template-columns: 1fr } }
+@media (min-width:600px) and (max-width:1024px){ .grid{ grid-template-columns: repeat(2,1fr) } }
+@media (min-width:1024px){ .grid{ grid-template-columns: repeat(3,1fr) } }
+
+/* Valfri “stardust”-bakgrund på en wrapper */
+.starry{
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.25) 50%, transparent 51%) repeat,
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.18) 50%, transparent 51%) repeat,
+    var(--bg);
+  background-size: 600px 600px, 800px 800px, auto;
+}
