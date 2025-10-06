@@ -1,32 +1,43 @@
+/* Kontroller + kort (som tidigare) */
 .card { position: relative; }
-.card .controls {
-  display: flex;
-  gap: .5rem;
-  align-items: center;
-  padding: .5rem .75rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.card .controls{
+  display:flex; gap:.5rem; align-items:center;
+  padding:.5rem .75rem; border-bottom:1px solid var(--border);
+  background:var(--surface); position: sticky; top: 0; z-index: 1;
 }
-.card .desc {
-  margin: .5rem .75rem 0;
-  max-height: 14rem;
-  overflow: auto;
-  line-height: 1.5;
+.card .desc{ margin:.5rem .75rem 0; max-height:14rem; overflow:auto; line-height:1.5; }
+.card h3{ margin:.5rem .75rem 0; }
+.card time{ display:block; margin:.5rem .75rem 1rem; color:var(--text-muted); }
+.vote{ padding:.4rem .6rem; border:1px solid var(--border); border-radius:10px; background:var(--surface); cursor:pointer; }
+.vote.up.active{ background: var(--accent); color:#fff; }
+.vote.down.active{ background:#ef4444; color:#fff; }
+
+/* Lightbox – centrerad, ingen beskärning */
+.lightbox{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.9);
+  display: grid; place-items: center;
+  padding: 2rem;
+  z-index: 100;
 }
-.card h3 { margin: .5rem .75rem 0; }
-.card time {
+.lightbox-inner{
+  max-width: 95vw;
+  max-height: 90vh;
+}
+.lightbox-inner img{
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto; height: auto;
+  object-fit: contain;
   display: block;
-  margin: .5rem .75rem 1rem;
-  color: var(--text-muted);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
-.vote {
-  padding: .4rem .6rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
+.lightbox .close-btn{
+  position: fixed;   /* alltid i hörnet av viewporten */
+  top: 1rem; right: 1rem;
+  background: var(--accent); color:#fff;
+  border: none; border-radius: 50%;
+  width: 2.2rem; height: 2.2rem;
+  font-size: 1.2rem; cursor: pointer;
 }
-.vote.up.active { background: var(--accent); color: #fff; }
-.vote.down.active { background: #ef4444; color: #fff; }
