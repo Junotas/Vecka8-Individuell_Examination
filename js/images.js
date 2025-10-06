@@ -15,23 +15,25 @@ const saveReactions = () =>
 const render = (items) => {
   const grid = document.querySelector('#grid');
   grid.innerHTML = items.map((it, i) => {
-    const r = state.reactions[it.id] || null; // 'up' | 'down' | null
+    const r = state.reactions[it.id] || null;
     return `
       <article class="card">
         <img src="${it.thumb}" alt="${it.title}">
         <h3>${it.title}</h3>
-        <p class="desc" hidden>${it.description}</p>
-        <time datetime="${it.date}">${it.date ? new Date(it.date).toLocaleDateString() : ''}</time>
-        <div style="display:flex; gap:.5rem; margin:.5rem 0 1rem">
-          <button class="vote up ${r==='up' ? 'active' : ''}" data-key="${it.id}" data-vote="up" aria-pressed="${r==='up'}">👍</button>
-          <button class="vote down ${r==='down' ? 'active' : ''}" data-key="${it.id}" data-vote="down" aria-pressed="${r==='down'}">👎</button>
+
+        <div class="controls">
+          <button class="vote up ${r === 'up' ? 'active' : ''}" data-key="${it.id}" data-vote="up" aria-pressed="${r === 'up'}">👍</button>
+          <button class="vote down ${r === 'down' ? 'active' : ''}" data-key="${it.id}" data-vote="down" aria-pressed="${r === 'down'}">👎</button>
           <button class="toggle" data-i="${i}">Visa/dölj</button>
         </div>
+
+        <p class="desc" hidden>${it.description}</p>
+        <time datetime="${it.date}">${it.date ? new Date(it.date).toLocaleDateString() : ''}</time>
       </article>
     `;
   }).join('');
 
-  // Reactions: tri-state toggle
+  // Hantera reaktioner
   grid.querySelectorAll('.vote').forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.key;
@@ -39,14 +41,13 @@ const render = (items) => {
       const current = state.reactions[key] || null;
 
       if (current === vote) {
-        // samma knapp igen → återställ till "inget"
-        delete state.reactions[key];
+        delete state.reactions[key]; // samma knapp igen = ta bort röst
       } else {
-        // sätt motsatt eller första gången
         state.reactions[key] = vote;
       }
+
       saveReactions();
-      render(state.items); // enkelt: rendera om för att uppdatera klasser/aria
+      render(state.items); // rendera om för att uppdatera UI
     });
   });
 
