@@ -8,7 +8,7 @@ const state = {
   loading: false,
 };
 
-// Lightbox (återanvänd mönster från images/rovers)
+// === Lightbox (fullscreen image) ===
 const openFullscreen = (src, alt) => {
   const overlay = document.createElement('div');
   overlay.className = 'lightbox';
@@ -33,6 +33,7 @@ const openFullscreen = (src, alt) => {
   document.body.appendChild(overlay);
 };
 
+// === Helpers ===
 const cardImage = (item) => {
   const img = item.images?.[0] || item.patch || '';
   return img ? `<img src="${img}" alt="${item.name}">` : '';
@@ -44,14 +45,16 @@ const successBadge = (s) => {
   return '<span class="badge unk">Okänt</span>';
 };
 
+// === Renderfunktion ===
 const render = (items) => {
   const grid = document.getElementById('sxGrid');
   const fmt = (d) => d ? new Date(d).toLocaleString() : '';
 
-  // client-filter
   const q = state.q.trim().toLowerCase();
   const filtered = q
-    ? items.filter(it => (it.name?.toLowerCase().includes(q) || it.details?.toLowerCase().includes(q)))
+    ? items.filter(it =>
+        (it.name?.toLowerCase().includes(q) ||
+         it.details?.toLowerCase().includes(q)))
     : items;
 
   if (!filtered.length) {
@@ -96,6 +99,7 @@ const setLoading = (on) => {
   grid.innerHTML = on ? '<p>Laddar…</p>' : '';
 };
 
+// === Datainläsning ===
 const load = async () => {
   if (state.loading) return;
   state.loading = true;
@@ -106,25 +110,30 @@ const load = async () => {
     else state.items = await getPastLaunches(12);
     render(state.items);
   } catch (e) {
-    document.getElementById('sxGrid').innerHTML = `<p>Kunde inte hämta SpaceX-data.</p>`;
+    document.getElementById('sxGrid').innerHTML =
+      `<p>Kunde inte hämta SpaceX-data.</p>`;
     console.error(e);
   } finally {
     state.loading = false;
   }
 };
 
+// === Init ===
 document.addEventListener('DOMContentLoaded', () => {
   applyGreeting('h1');
 
-  // mode-knappar
+  // mode-knappar (med aktiv klass)
   document.querySelectorAll('.modebar .mode').forEach(btn => {
     btn.addEventListener('click', () => {
+      document.querySelectorAll('.modebar .mode')
+        .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       state.mode = btn.dataset.mode;
       load();
     });
   });
 
-  // enkel textfilter
+  // sökformulär
   const form = document.getElementById('sxSearch');
   const input = document.getElementById('sxQ');
   form.addEventListener('submit', (e) => {
@@ -134,5 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // första laddningen
+  document.querySelector('.modebar .mode[data-mode="latest"]').classList.add('active');
   load();
 });

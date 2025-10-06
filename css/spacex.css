@@ -1,5 +1,7 @@
-/* Kort-specifikt för SpaceX-sidan */
-.launch-card h3 { margin:.5rem .75rem 0; }
+/* === SpaceX Page Styling === */
+
+/* Titel & kort */
+.launch-card h3 { margin:.5rem .75rem 0; font-size:1.15rem; }
 .launch-card .meta {
   display:flex; gap:.5rem; align-items:center;
   margin:.25rem .75rem .5rem; color: var(--text-muted);
@@ -9,49 +11,131 @@
 .badge.fail{ background:#7f1d1d; color:#fecaca; }
 .badge.unk{ background:#1f2937; color:#d1d5db; }
 
-/* Knapprad + desc-behav (sticky) */
+/* Kontrollrad (sticky top) */
 .launch-card .controls{
-  display:flex; gap:.5rem; align-items:center;
-  padding:.5rem .75rem; border-bottom:1px solid var(--border);
-  background:var(--surface); position: sticky; top: 0; z-index: 1;
+  display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+  padding:.5rem .75rem;
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  position: sticky; top: 0; z-index: 1;
 }
+
+/* Description */
 .launch-card .desc{
-  margin:.5rem .75rem 1rem; max-height:14rem; overflow:auto; line-height:1.5;
+  margin:.5rem .75rem 1rem;
+  max-height:14rem;
+  overflow:auto;
+  line-height:1.5;
 }
 
-/* Små knappar */
-.button.sm{ padding:.35rem .6rem; font-size:.85rem; border-radius:10px; }
-.button.ghost{ background:transparent; border:1px solid var(--border); color:var(--text); }
+/* === Buttons === */
+.button.sm{
+  padding:.4rem .7rem;
+  font-size:.85rem;
+  border-radius:10px;
+  transition: background var(--speed), transform var(--speed);
+}
+.button.sm:hover{ transform:translateY(-1px); }
 
-/* Lightbox (återanvänd från images-sidan) */
+.button.ghost{
+  background:transparent;
+  border:1px solid var(--accent-2);
+  color:var(--accent-2);
+}
+.button.ghost:hover{
+  background:var(--accent-2);
+  color:#000;
+}
+
+/* Visa/dölj */
+.toggle{
+  padding:.4rem .8rem;
+  border-radius:10px;
+  background:var(--accent);
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  font-size:.9rem;
+}
+.toggle:hover{ background:var(--accent-2); color:#000; }
+
+/* === Lightbox === */
 .lightbox{
-  position: fixed; inset: 0;
+  position: fixed;
+  inset: 0;
   background: rgba(0,0,0,.9);
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
   padding: 2rem;
   z-index: 100;
 }
 .lightbox-inner{ max-width: 95vw; max-height: 90vh; }
 .lightbox-inner img{
-  max-width: 95vw; max-height: 90vh;
-  width:auto; height:auto; object-fit:contain;
-  border-radius: var(--radius); box-shadow: var(--shadow);
+  max-width: 95vw;
+  max-height: 90vh;
+  width:auto; height:auto;
+  object-fit:contain;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 .close-btn{
-  position: fixed; top: 1rem; right: 1rem;
-  background: var(--accent); color:#fff; border:none; border-radius:50%;
-  width: 2.2rem; height: 2.2rem; font-size:1.2rem; cursor:pointer;
+  position: fixed;
+  top: 1rem; right: 1rem;
+  background: var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width: 2.2rem; height: 2.2rem;
+  font-size:1.2rem;
+  cursor:pointer;
 }
+.close-btn:hover{ background: var(--accent-2); color:#000; }
 
-/* Modebar + sök */
+/* === Modebar + Search === */
 .modebar{
-  display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
-  margin: .5rem 0 1rem;
+  display:flex; flex-wrap:wrap; gap:.6rem; align-items:center;
+  margin: .5rem 0 1.5rem;
 }
 .modebar .mode{
-  padding:.45rem .8rem; border:1px solid var(--border);
-  border-radius:10px; background:var(--surface); cursor:pointer;
+  padding:.5rem 1rem;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  transition: all var(--speed);
 }
-.sx-search{ margin-left:auto; display:flex; gap:.5rem; }
-.sx-search input{ padding:.45rem .6rem; border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--text); }
-.sx-search button{ padding:.45rem .8rem; border-radius:10px; }
+.modebar .mode:hover{
+  background:var(--accent-2);
+  color:#000;
+}
+.modebar .mode.active{
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color:#fff;
+  font-weight:600;
+}
+
+.sx-search{
+  margin-left:auto;
+  display:flex; gap:.5rem; align-items:center;
+}
+.sx-search input{
+  padding:.45rem .6rem;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--text);
+}
+.sx-search button{
+  padding:.45rem .9rem;
+  border-radius:10px;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  transition:background var(--speed);
+}
+.sx-search button:hover{
+  background:var(--accent-2);
+  color:#000;
+}
