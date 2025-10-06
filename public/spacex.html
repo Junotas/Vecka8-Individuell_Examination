@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpaceX</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/spacex.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="./index.html">Start</a>
+      <a href="./images.html">Bilder</a>
+      <a href="./spacex.html" aria-current="page">SpaceX</a>
+      <button id="resetName" type="button" style="margin-left:auto">Byt namn</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>SpaceX</h1>
+
+    <section class="modebar" aria-label="Välj dataset">
+      <button class="mode" data-mode="latest">Senaste</button>
+      <button class="mode" data-mode="upcoming">Kommande</button>
+      <button class="mode" data-mode="past">Tidigare</button>
+
+      <form id="sxSearch" class="sx-search">
+        <input id="sxQ" name="sxQ" placeholder="Filter: namn/beskrivning">
+        <button type="submit">Filtrera</button>
+      </form>
+    </section>
+
+    <section>
+      <div id="sxGrid" class="grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span>
+  </footer>
+
+  <script type="module" src="../js/app.js"></script>
+  <script type="module" src="../js/spacex.js"></script>
+</body>
+</html>
