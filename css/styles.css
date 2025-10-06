@@ -67,3 +67,8 @@ a{color:var(--accent)}
     var(--bg);
   background-size: 600px 600px, 800px 800px, auto;
 }
+
+
+.vote { padding:.4rem .6rem; border:1px solid var(--border); border-radius:10px; background:var(--surface); }
+.vote.up.active { background: var(--accent); color:#fff; }
+.vote.down.active { background: #ef4444; color:#fff; }
