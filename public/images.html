@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bilder</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="./index.html">Start</a>
+      <a href="./images.html" aria-current="page">Bilder</a>
+      <a href="./rovers.html">Roverfoton</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1 id="welcome">Bilder</h1>
+
+    <section>
+      <form id="searchForm">
+        <input id="q" name="q" placeholder="Sök t.ex. nebula">
+        <button type="submit">Sök</button>
+      </form>
+    </section>
+
+    <section>
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span>
+  </footer>
+
+  <script type="module" src="../js/app.js"></script>
+  <script type="module" src="../js/images.js"></script>
+</body>
+</html>

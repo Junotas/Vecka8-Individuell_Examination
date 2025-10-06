@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="./index.html" aria-current="page">Start</a>
+      <a href="./images.html">Bilder</a>
+      <a href="./rovers.html">Roverfoton</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Välkommen</h1>
+    <form id="nameForm">
+      <label for="name">Ditt namn</label>
+      <input id="name" name="name" minlength="2" required>
+      <button type="submit">Fortsätt</button>
+    </form>
+  </main>
+
+  <footer>
+    © <span id="year"></span>
+  </footer>
+
+  <script type="module" src="../js/app.js"></script>
+  <script type="module" src="../js/index.js"></script>
+</body>
+</html>
