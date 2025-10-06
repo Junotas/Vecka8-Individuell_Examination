@@ -2,13 +2,13 @@ import { applyGreeting } from './app.js';
 import { getLatestLaunch, getUpcomingLaunches, getPastLaunches } from './api.spacex.js';
 
 const state = {
-  mode: 'latest', // 'latest' | 'upcoming' | 'past'
+  mode: 'latest', // latest | upcoming | past | failed
   items: [],
   q: '',
   loading: false,
 };
 
-// === Lightbox (fullscreen image) ===
+// === Lightbox ===
 const openFullscreen = (src, alt) => {
   const overlay = document.createElement('div');
   overlay.className = 'lightbox';
@@ -18,14 +18,12 @@ const openFullscreen = (src, alt) => {
   `;
   const prevOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
-
   const close = () => {
     overlay.remove();
     document.body.style.overflow = prevOverflow;
     document.removeEventListener('keydown', onKey);
   };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
-
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay || e.target.classList.contains('close-btn')) close();
   });
@@ -45,12 +43,13 @@ const successBadge = (s) => {
   return '<span class="badge unk">Okänt</span>';
 };
 
-// === Renderfunktion ===
+// === Render ===
 const render = (items) => {
   const grid = document.getElementById('sxGrid');
   const fmt = (d) => d ? new Date(d).toLocaleString() : '';
-
   const q = state.q.trim().toLowerCase();
+
+  // textfilter
   const filtered = q
     ? items.filter(it =>
         (it.name?.toLowerCase().includes(q) ||
@@ -81,7 +80,6 @@ const render = (items) => {
     </article>
   `).join('');
 
-  // events
   grid.querySelectorAll('.launch-card img').forEach(img => {
     img.addEventListener('click', () => openFullscreen(img.src, img.alt));
   });
@@ -99,7 +97,7 @@ const setLoading = (on) => {
   grid.innerHTML = on ? '<p>Laddar…</p>' : '';
 };
 
-// === Datainläsning ===
+// === Data ===
 const load = async () => {
   if (state.loading) return;
   state.loading = true;
@@ -107,11 +105,16 @@ const load = async () => {
   try {
     if (state.mode === 'latest') state.items = await getLatestLaunch();
     else if (state.mode === 'upcoming') state.items = await getUpcomingLaunches(12);
-    else state.items = await getPastLaunches(12);
+    else if (state.mode === 'failed') {
+      // hämta alla + filtrera ut misslyckade
+      const all = await getPastLaunches(150);
+      state.items = all.filter(x => x.success === false);
+    } else {
+      state.items = await getPastLaunches(12);
+    }
     render(state.items);
   } catch (e) {
-    document.getElementById('sxGrid').innerHTML =
-      `<p>Kunde inte hämta SpaceX-data.</p>`;
+    document.getElementById('sxGrid').innerHTML = `<p>Kunde inte hämta SpaceX-data.</p>`;
     console.error(e);
   } finally {
     state.loading = false;
@@ -122,18 +125,17 @@ const load = async () => {
 document.addEventListener('DOMContentLoaded', () => {
   applyGreeting('h1');
 
-  // mode-knappar (med aktiv klass)
+  // Modeknappar (inkl ny "Misslyckade")
   document.querySelectorAll('.modebar .mode').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.modebar .mode')
-        .forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.modebar .mode').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       state.mode = btn.dataset.mode;
       load();
     });
   });
 
-  // sökformulär
+  // Sök
   const form = document.getElementById('sxSearch');
   const input = document.getElementById('sxQ');
   form.addEventListener('submit', (e) => {
