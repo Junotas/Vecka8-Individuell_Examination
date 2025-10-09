@@ -1,6 +1,7 @@
 import { applyGreeting } from './app.js';
 import { searchNasaImages } from './api.nasa.images.js';
 
+// Global state for current data, user reactions, query, etc.
 const state = {
   items: [],
   reactions: JSON.parse(localStorage.getItem('reactions') || '{}'),
@@ -9,10 +10,11 @@ const state = {
   loading: false,
 };
 
+// Save reactions (thumbs up/down) to localStorage
 const saveReactions = () =>
   localStorage.setItem('reactions', JSON.stringify(state.reactions));
 
-// Fullscreen/lightbox
+// Open a fullscreen lightbox for clicked image
 const openFullscreen = (src, alt) => {
   const overlay = document.createElement('div');
   overlay.className = 'lightbox';
@@ -26,11 +28,13 @@ const openFullscreen = (src, alt) => {
   const prevOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
 
+  // Close the fullscreen view
   const close = () => {
     overlay.remove();
     document.body.style.overflow = prevOverflow;
     document.removeEventListener('keydown', onKey);
   };
+  // Allow ESC key to close fullscreen
   const onKey = (e) => { if (e.key === 'Escape') close(); };
 
   overlay.addEventListener('click', (e) => {
@@ -41,6 +45,7 @@ const openFullscreen = (src, alt) => {
   document.body.appendChild(overlay);
 };
 
+// Render all image cards to the DOM
 const render = (items) => {
   const grid = document.querySelector('#grid');
   grid.innerHTML = items.map((it, i) => {
@@ -62,12 +67,12 @@ const render = (items) => {
     `;
   }).join('');
 
-  // Klick på bild -> fullscreen
+  // Enable fullscreen when clicking an image
   grid.querySelectorAll('img').forEach(img => {
     img.addEventListener('click', () => openFullscreen(img.src, img.alt));
   });
 
-  // Reaktioner (tri-state)
+  // Enable like/dislike with tri-state toggle
   grid.querySelectorAll('.vote').forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.key;
@@ -80,7 +85,7 @@ const render = (items) => {
     });
   });
 
-  // Visa/dölj beskrivning
+  // Toggle description visibility
   grid.querySelectorAll('.toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const i = Number(btn.dataset.i);
@@ -90,11 +95,13 @@ const render = (items) => {
   });
 };
 
+// Show a loading message while waiting for data
 const setLoading = (on) => {
   const grid = document.querySelector('#grid');
   grid.innerHTML = on ? '<p>Laddar…</p>' : '';
 };
 
+// Fetch data from NASA API and render it
 const loadAndRender = async (q, page = 1) => {
   state.loading = true;
   setLoading(true);
@@ -108,11 +115,13 @@ const loadAndRender = async (q, page = 1) => {
   }
 };
 
+// Run when the page is ready
 document.addEventListener('DOMContentLoaded', () => {
   applyGreeting('#welcome');
   const form = document.querySelector('#searchForm');
   const input = document.querySelector('#q');
 
+  // Handle search form submit
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     const q = (input?.value || '').trim() || 'nebula';
@@ -121,5 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAndRender(state.q, state.page);
   });
 
+  // Initial load
   loadAndRender(state.q, state.page);
 });
