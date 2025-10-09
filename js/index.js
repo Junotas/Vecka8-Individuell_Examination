@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = nameInput.value.trim();
 
     if (name.length < 2) {
-      alert('Namnet måste vara minst 2 tecken.');
+      alert('');
       return;
     }
 
