@@ -54,7 +54,7 @@ const render = (items) => {
   const grid = document.querySelector("#grid");
   grid.innerHTML = items
     .map((it, i) => {
-      //Destructuring här
+      // Destructuring here
       const { id, thumb, title, description, date } = it;
       const r = state.reactions[id] || null;
 

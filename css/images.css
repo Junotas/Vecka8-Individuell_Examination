@@ -33,7 +33,7 @@
   color: var(--text-muted);
 }
 
-/* Kontrollrad (sticky) */
+/* Control row (sticky) */
 .card .controls {
   display: flex;
   gap: 0.5rem;
@@ -47,17 +47,17 @@
   z-index: 1;
 }
 
-/* Start: sökformulär (images) */
-#searchForm{
+/* Start: search form (images) */
+#searchForm {
   display: flex;
   align-items: center;
-  gap: .75rem;
+  gap: 0.75rem;
   margin: 0 0 1rem 0;
 }
 
-#searchForm input{
+#searchForm input {
   flex: 1 1 260px;
-  padding: .55rem .75rem;
+  padding: 0.55rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
@@ -65,55 +65,62 @@
   font-size: 1rem;
 }
 
-#searchForm button[type="submit"]{
-  padding: .55rem 1rem;
+#searchForm button[type="submit"] {
+  padding: 0.55rem 1rem;
   border: none;
   border-radius: var(--radius);
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   color: #fff;
   cursor: pointer;
-  transition: transform var(--speed), background var(--speed), opacity var(--speed);
+  transition: transform var(--speed), background var(--speed),
+    opacity var(--speed);
 }
-#searchForm button[type="submit"]:hover{
+#searchForm button[type="submit"]:hover {
   transform: translateY(-1px);
-  opacity: .95;
+  opacity: 0.95;
 }
 
-@media (max-width: 600px){
-  #searchForm{ flex-direction: column; align-items: stretch; }
-  #searchForm button[type="submit"]{ width: 100%; }
+@media (max-width: 600px) {
+  #searchForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #searchForm button[type="submit"] {
+    width: 100%;
+  }
 }
-/* Slut: sökformulär */
+/* End: search form */
 
-#resetName{
-  margin-left: auto;                 /* push to the right on desktop */
-  padding: .45rem .9rem;
+#resetName {
+  margin-left: auto; /* push to the right on desktop */
+  padding: 0.45rem 0.9rem;
   border: none;
   border-radius: var(--radius);
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: transform var(--speed), opacity var(--speed), background var(--speed);
+  transition: transform var(--speed), opacity var(--speed),
+    background var(--speed);
 }
-#resetName:hover{
+#resetName:hover {
   transform: translateY(-1px);
-  opacity: .95;
+  opacity: 0.95;
 }
-#resetName:focus-visible{
+#resetName:focus-visible {
   outline: 2px solid var(--accent-2);
   outline-offset: 2px;
 }
 
 /* On small screens, center with the rest of nav items */
-@media (max-width: 600px){
-  #resetName{
+@media (max-width: 600px) {
+  #resetName {
     margin-left: 0;
     width: 100%;
-    order: 99;            /* drops to last row when nav wraps */
+    order: 99; /* drops to last row when nav wraps */
   }
 }
-/* Beskrivning i kort */
+/* Description in cards */
 .card .desc {
   margin: 0.5rem 0.75rem 0;
   max-height: 14rem;
@@ -139,7 +146,7 @@
   border-color: var(--accent);
 }
 .vote.down.active {
-  background: var(--danger); 
+  background: var(--danger);
   color: #fff;
   border-color: var(--danger);
 }
@@ -186,7 +193,7 @@
   box-shadow: var(--shadow);
 }
 .lightbox .close-btn {
-  position: fixed; /* alltid i hörnet av viewporten */
+  position: fixed; /* always in the corner of the viewport */
   top: 1rem;
   right: 1rem;
   background: var(--accent);
