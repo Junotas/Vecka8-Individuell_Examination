@@ -73,7 +73,7 @@
   border-color: var(--accent);
 }
 .vote.down.active {
-  background: var(--danger); /* fixad var() */
+  background: var(--danger); 
   color: #fff;
   border-color: var(--danger);
 }

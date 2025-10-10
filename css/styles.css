@@ -8,11 +8,11 @@
   --text: #e6e9f2;
   --text-muted: #a6b0cf;
 
-  --accent: #7c4dff; /* nebulosa-lila */
-  --accent-2: #22d3ee; /* stjärnblå */
+  --accent: #7c4dff; 
+  --accent-2: #22d3ee;
   --warning: #f59e0b;
-  --danger: #ef4444; /* används av images.css för downvote */
-  --overlay: rgba(0, 0, 0, 0.9); /* används av images.css för lightbox */
+  --danger: #ef4444;
+  --overlay: rgba(0, 0, 0, 0.9); 
 
   --radius: 14px;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
@@ -115,16 +115,6 @@ footer {
 .button:hover {
   transform: translateY(-1px);
   opacity: 0.9;
-}
-
-.button.ghost {
-  background: transparent;
-  color: var(--accent-2);
-  border: 1px solid var(--accent-2);
-}
-.button.ghost:hover {
-  background: var(--accent-2);
-  color: #000;
 }
 
 /* ===============================
