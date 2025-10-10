@@ -6,7 +6,7 @@ const setCurrentYear = () => {
 const getUserName = () => localStorage.getItem('userName') || '';
 
 const setUserName = (name) => {
-  if (!name || name.trim().length < 2) return;
+  if (!name || name.trim().length < 1) return;
   localStorage.setItem('userName', name.trim());
 };
 
