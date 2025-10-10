@@ -143,6 +143,49 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+#nameForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin: clamp(1rem, 4vw, 2rem) auto;
+  max-width: 600px;
+}
+
+#nameForm label{
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+#nameForm input{
+  flex: 1 1 240px;
+  padding: .6rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+#nameForm button[type="submit"]{
+  padding: .6rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  cursor: pointer;
+  transition: transform var(--speed), background var(--speed), opacity var(--speed);
+}
+#nameForm button[type="submit"]:hover{
+  transform: translateY(-1px);
+  opacity: .95;
+}
+
+@media (max-width: 600px){
+  #nameForm{ flex-direction: column; align-items: stretch; }
+  #nameForm button[type="submit"]{ width: 100%; }
+}
+
 @media (max-width: 600px) {
   nav {
     justify-content: center;
