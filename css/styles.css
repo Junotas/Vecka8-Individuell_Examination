@@ -11,15 +11,8 @@
   --accent: #7c4dff; /* nebulosa-lila */
   --accent-2: #22d3ee; /* stjärnblå */
   --warning: #f59e0b;
-
-  --ok-bg: #064e3b;
-  --ok-text: #a7f3d0;
-  --fail-bg: #7f1d1d;
-  --fail-text: #fecaca;
-  --unk-bg: #1f2937;
-  --unk-text: #d1d5db;
-  --danger: #ef4444;
-  --overlay: rgba(0, 0, 0, 0.9);
+  --danger: #ef4444; /* används av images.css för downvote */
+  --overlay: rgba(0, 0, 0, 0.9); /* används av images.css för lightbox */
 
   --radius: 14px;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
@@ -28,20 +21,13 @@
   --font: ui-sans-serif, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
 }
 
-/* Ljus variant (justerade badge-kontraster) */
+/* Ljus variant */
 :root[data-theme="light"] {
   --bg: #f6f8ff;
   --surface: #ffffff;
   --border: #dfe3f6;
   --text: #101224;
   --text-muted: #414b6e;
-
-  --ok-bg: #10b981; /* emerald */
-  --ok-text: #052e1a;
-  --fail-bg: #ef4444; /* red */
-  --fail-text: #fffaf0;
-  --unk-bg: #374151; /* gray-700 */
-  --unk-text: #e5e7eb; /* gray-200 */
   --overlay: rgba(0, 0, 0, 0.85);
 }
 
@@ -57,7 +43,9 @@ body {
   font-family: var(--font);
   color: var(--text);
   background: var(--bg);
-  min-height: 100dvh; /* sticky footer */
+
+  /* Sticky footer layout */
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -111,7 +99,7 @@ footer {
 }
 
 /* ===============================
-   Knappar
+   Generella knappar
 =============================== */
 .button {
   display: inline-block;
@@ -139,193 +127,6 @@ footer {
   color: #000;
 }
 
-/* Små knappar som i SpaceX-listan */
-.button.sm {
-  padding: 0.4rem 0.7rem;
-  font-size: 0.85rem;
-  border-radius: 10px;
-}
-.button.sm:hover {
-  transform: translateY(-1px);
-}
-
-/* Toggle-knapp (används på flera sidor) */
-.toggle {
-  padding: 0.4rem 0.8rem;
-  border-radius: 10px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background var(--speed), color var(--speed);
-}
-.toggle:hover {
-  background: var(--accent-2);
-  color: #000;
-}
-
-/* ===============================
-   Kort / Galleri
-=============================== */
-.grid {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-.card h3 {
-  margin: 0.5rem 0.75rem 0;
-}
-.card time {
-  display: block;
-  margin: 0.5rem 0.75rem 1rem;
-  color: var(--text-muted);
-}
-
-/* Gemensam sticky kontrollrad på kort */
-.card .controls {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-/* Gemensam beskrivning i kort */
-.card .desc {
-  margin: 0.5rem 0.75rem 0;
-  max-height: 14rem;
-  overflow: auto;
-  line-height: 1.5;
-}
-
-/* Reaktioner (images-sidan) */
-.vote {
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  cursor: pointer;
-  transition: background var(--speed), color var(--speed),
-    border-color var(--speed);
-}
-.vote.up.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-.vote.down.active {
-  background: var(--danger);
-  color: #fff;
-  border-color: var(--danger);
-}
-
-/* Badges (SpaceX) */
-.badge {
-  display: inline-block;
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-}
-.badge.ok {
-  background: var(--ok-bg);
-  color: var(--ok-text);
-}
-.badge.fail {
-  background: var(--fail-bg);
-  color: var(--fail-text);
-}
-.badge.unk {
-  background: var(--unk-bg);
-  color: var(--unk-text);
-}
-
-/* ===============================
-   Lightbox (gemensam)
-=============================== */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: var(--overlay);
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-  z-index: 100;
-}
-.lightbox-inner {
-  max-width: 95vw;
-  max-height: 90vh;
-}
-.lightbox-inner img {
-  max-width: 95vw;
-  max-height: 90vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-.lightbox .close-btn {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 2.2rem;
-  height: 2.2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-.lightbox .close-btn:hover {
-  background: var(--accent-2);
-  color: #000;
-}
-
-/* ===============================
-   Responsiva brytpunkter
-=============================== */
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  nav {
-    justify-content: center;
-  }
-}
-@media (min-width: 600px) and (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 /* ===============================
    Extra effekter & A11y
 =============================== */
@@ -345,9 +146,22 @@ footer {
     var(--bg);
   background-size: 600px 600px, 800px 800px, auto;
 }
+
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--accent-2);
   outline-offset: 2px;
 }
 
+@media (max-width: 600px) {
+  nav {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
