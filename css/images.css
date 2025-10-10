@@ -10,7 +10,7 @@
 .card time{ display:block; margin:.5rem .75rem 1rem; color:var(--text-muted); }
 .vote{ padding:.4rem .6rem; border:1px solid var(--border); border-radius:10px; background:var(--surface); cursor:pointer; }
 .vote.up.active{ background: var(--accent); color:#fff; }
-.vote.down.active{ background:#ef4444; color:#fff; }
+.vote.down.active{ background:(--danger); color:#fff; }
 
 /* Lightbox – centrerad, ingen beskärning */
 .lightbox{
