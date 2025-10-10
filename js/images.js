@@ -77,7 +77,7 @@ const render = (items) => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.key;
       const vote = btn.dataset.vote;
-      const current = state.reactions[key] || null;
+      let current = state.reactions[key] || null;
       if (current === vote) delete state.reactions[key];
       else state.reactions[key] = vote;
       saveReactions();
