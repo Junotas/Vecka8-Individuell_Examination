@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = nameInput.value.trim();
 
     if (name.length < 2) {
+      // felmeddelandet kommer från HTML5-validering i index.html
       alert('');
       return;
     }
