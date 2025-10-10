@@ -79,7 +79,7 @@ const render = (items) => {
 
         <p class="desc" hidden>${description}</p>
         <time datetime="${date}">${
-        date ? new Date(date).toLocaleDateString() : ""
+        date ? new Date(date).toLocaleDateString() : "datum okänt"
       }</time>
       </article>
     `;
