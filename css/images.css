@@ -129,7 +129,7 @@
 }
 
 /* ===============================
-   Interaktivitet (vote + toggle)
+   (vote + toggle)
 =============================== */
 .vote {
   padding: 0.4rem 0.6rem;
@@ -167,7 +167,7 @@
 }
 
 /* ===============================
-   Lightbox – centrerad, ingen beskärning
+   Lightbox
 =============================== */
 .lightbox {
   position: fixed;
@@ -211,7 +211,7 @@
 }
 
 /* ===============================
-   Responsiva kolumner (images)
+   Responsivity
 =============================== */
 @media (max-width: 600px) {
   .grid {

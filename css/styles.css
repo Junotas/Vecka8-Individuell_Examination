@@ -1,5 +1,5 @@
 /* ===============================
-   Bas-tokens / färgtema
+   Theme Variables
 =============================== */
 :root {
   --bg: #0b1020;
@@ -99,7 +99,7 @@ footer {
 }
 
 /* ===============================
-   Generella knappar
+   Buttons & Forms
 =============================== */
 .button {
   display: inline-block;

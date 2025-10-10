@@ -42,3 +42,5 @@ index.js
 images.js
 api.nasa.images.js
 
+
+Note: The repository includes a .gitignore that is legacy, it was added when an API key was expected. NASA's Images API does not require a key for this project, so no secrets are stored in the repo.
